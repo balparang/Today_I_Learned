@@ -1,8 +1,11 @@
 package com.example.dddstart.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Orderer {
 
     // MemberId에 정의된 컬럼 이름을 변경하기 위해 AttributeOverride 사용

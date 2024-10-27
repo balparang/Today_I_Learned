@@ -1,17 +1,17 @@
 package com.example.dddstart.domain;
 
 import jakarta.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderNo implements Serializable {
 
     private Long id;
-
-    protected OrderNo() {
-    }
 
     @Override
     public boolean equals(final Object o) {
