@@ -14,7 +14,7 @@ public class Order {
     @Embedded
     private Orderer orderer;
 
-    @Column(name = "state")
+    @Column(name = "state", columnDefinition = "varchar(30)")
     @Enumerated(EnumType.STRING)
     private OrderState state;
 
