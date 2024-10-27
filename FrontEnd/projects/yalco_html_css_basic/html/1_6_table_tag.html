@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://showcases.yalco.kr/html-css/01-06/table.css">
+  <title>document</title>
+</head>
+<body>
+<!-- 강의 노트 -->
+<a href="https://www.yalco.kr/@html-css/1-6/">
+  <h2>강의 노트</h2>
+</a>
+
+<!--table>caption+(tr>td*3)-->
+<table>
+  <caption>1에서 9까지의 숫자들</caption>
+  <tr>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>8</td>
+    <td>9</td>
+  </tr>
+</table>
+
+<br><br>
+
+<table>
+  <caption>웹개발 공부 기록</caption>
+  <thead>
+    <tr>
+      <th scope="col">과목</th>
+      <th scope="col">월</th>
+      <th scope="col">화</th>
+      <th scope="col">수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">HTML</th>
+      <td>60분</td>
+      <td>60분</td>
+      <td>0분</td>
+    </tr>
+    <tr>
+      <!-- scope="row" 의 의미: 이 row에 대한 헤더이다. 스크린 리더, 컴퓨터 파싱 고려. -->
+      <th scope="row">CSS</th>
+      <td>0분</td>
+      <td>30분</td>
+      <td>60분</td>
+    </tr>
+    <tr>
+      <th scope="row">JS</th>
+      <td>0분</td>
+      <td>0분</td>
+      <td>60분</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">총 시간</th>
+      <td>60분</td>
+      <td>90분</td>
+      <td>120분</td>
+    </tr>
+  </tfoot>
+</table>
+
+<br><br><br>
+
+<!--table>(tr>td{1}*4)*4-->
+
+<!--rowspan, colspan-->
+<table>
+  <tr>
+    <td>1</td>
+    <td colspan="2">2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td rowspan="3">3</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td colspan="2" rowspan="2">4</td>
+  </tr>
+  <tr>
+    <td>1</td>
+  </tr>
+</table>
+
+
+</body>
+</html>
