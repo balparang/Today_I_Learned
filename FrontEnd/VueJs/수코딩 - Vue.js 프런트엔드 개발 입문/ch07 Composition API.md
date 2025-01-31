@@ -137,3 +137,45 @@ setTimeout(() => {
 > - computed() 함수를 set(), get()으로 정의해서 사용할 경우
 >   - ref(), reactive() 데이터를 직접 수정하는 방식으로 사용할 수 있긴한데 권장하지 않는다.
 > - _**computed는 그냥 원래 목적대로 읽기 전용으로 사용하라.**_
+
+## 7.2.4 함수 정의 
+
+```vue
+<template>
+  <h1>총합: {{ numberSum }}</h1>
+  <h1>ref: {{ count }}</h1>
+  <h1>reactive: {{ state.count }}</h1>
+  <button @click="expressFunc">ref 증가</button>
+  <button @click="arrowFunc">reactive 증가</button>
+</template>
+
+<script setup>
+import {ref, reactive, computed} from "vue";
+
+/**
+ * 반응형 데이터 정의
+ */
+const count = ref(0);
+const state = reactive({
+  count: 0,
+  message: "Hello, Vue 3!"
+});
+
+const numberSum = computed(() => count.value + state.count);
+
+/**
+ * 함수 표현식
+ */
+const expressFunc = function () {
+  count.value++;
+};
+/**
+  * 화살표 함수
+  */
+const arrowFunc = () => {
+  state.count++;
+};
+</script>
+```
+
+- 함수 정의는 함수 표현식 또는 화살표 함수로 정의 가능
