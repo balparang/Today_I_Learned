@@ -3,6 +3,9 @@
   * [7.2.2 템플릿 ref](#722-템플릿-ref)
     * [`ref()`로 생성한 반응형 데이터를 통한 DOM 참조](#ref로-생성한-반응형-데이터를-통한-dom-참조)
     * [컴포넌트 참조](#컴포넌트-참조)
+* [7.2.3 computed 속성 활용](#723-computed-속성-활용)
+    * [일반적인 사용법](#일반적인-사용법)
+    * [수정 가능한 계산된 속성](#수정-가능한-계산된-속성)
 <!-- TOC -->
 
 # 7.2 컴포지션 API 기본 구성 요소
@@ -73,3 +76,64 @@ setTimeout(() => {
 ```
 
 - ref 속성으로 다른 컴포넌트 인스턴스에 접근 가능하다.
+
+# 7.2.3 computed 속성 활용
+
+### 일반적인 사용법
+
+```vue
+<template>
+  <h1>{{ refDoubleCount }}</h1>
+  <h1>{{ reactiveDoubleCount }}</h1>
+</template>
+
+<script setup>
+import {ref, reactive, computed} from 'vue'
+
+const refCount = ref(1);
+const reactiveCount = reactive({count: 2});
+
+// ref() 데이터 활용 시 value 속성 사용
+const refDoubleCount = computed(() => refCount.value * 2);
+
+// reactive() 데이터 활용 시에는 value 속성 불필요`
+const reactiveDoubleCount = computed(() => reactiveCount.count * 2);
+
+/**
+ * computed() 데이터 출력 시에는 value 사용
+ */
+console.log(refDoubleCount.value);
+console.log(reactiveDoubleCount.value);
+</script>
+```
+
+### 수정 가능한 계산된 속성
+
+```vue
+<template>
+  <h1>{{ refDoubleCount }}</h1>
+  <h1>{{ reactiveDoubleCount }}</h1>
+</template>
+
+<script setup>
+import {ref, reactive, computed} from 'vue'
+
+const refCount = ref(1);
+const reactiveCount = reactive({count: 2});
+
+const refDoubleCount = computed(() => refCount.value * 2);
+const reactiveDoubleCount = computed(() => reactiveCount.count * 2);
+
+setTimeout(() => {
+  refDoubleCount.value = 20; // computed 변수는 재할당 불가해서 콘솔에 경고 표시 뜬다.
+}, 2000);
+</script>
+```
+
+- 원래 computed 변수는 재할당 불가능하다.
+  - 그래서 재할당 시 콘솔에 경고 표시 뜬다.(`[Vue warn] Write operation failed: computed value is readonly`)
+
+> 👨🏻‍🏫 수코딩의 조언
+> - computed() 함수를 set(), get()으로 정의해서 사용할 경우
+>   - ref(), reactive() 데이터를 직접 수정하는 방식으로 사용할 수 있긴한데 권장하지 않는다.
+> - _**computed는 그냥 원래 목적대로 읽기 전용으로 사용하라.**_
