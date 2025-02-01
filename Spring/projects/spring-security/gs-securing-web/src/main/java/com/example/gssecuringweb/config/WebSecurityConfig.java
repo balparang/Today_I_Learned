@@ -24,7 +24,10 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home").permitAll() // 인증 없이 접근 가능한 경로
-                        .anyRequest().authenticated() // 그 외 모든 경로는 인증 필요
+                        // 인증되지 않은 사용자는 Security가 /login으로 자동으로 302 리다이렉트 시킨다.
+                        // 리다이렉트 시키기 전에, 서버 세션에 JSESSIONID에 매핑되는 SPRING_SECURITY_SAVED_REQUEST에 이전 요청 URL을 담아두고,
+                        // 로그인 성공 시 JSESSIONID에 매핑되는 서버 세션에서 SPRING_SECURITY_SAVED_REQUEST를 삭제하고 302로 리다이렉트한다.
+                        .anyRequest().authenticated() // 그 외 모든 경로는 인증 필요.
                 )
                 .formLogin((form) -> form
                         .loginPage("/login") // 커스텀 로그인 페이지 URL 지정
