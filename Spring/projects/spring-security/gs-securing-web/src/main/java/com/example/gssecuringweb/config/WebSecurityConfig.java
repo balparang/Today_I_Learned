@@ -30,6 +30,7 @@ public class WebSecurityConfig {
                         .loginPage("/login") // 커스텀 로그인 페이지 URL 지정
                         .permitAll() // 로그인 페이지는 인증 없이 접근 가능
                 )
+                // /logout POST 요청 성공 시 기본적으로 /login?logout으로 302 redirect
                 .logout((logout) -> logout.permitAll()); // 로그아웃도 인증 없이 접근 가능
 
         return http.build();
@@ -42,7 +43,7 @@ public class WebSecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user")
-                .password("password")
+                .password("pw")
                 .roles("USER")
                 .build();
 
